@@ -1,5 +1,4 @@
-Contract Information
-Ethereum Mainnet
+Contract Information - Ethereum Mainnet
 # 0x0c90C57aaf95A3A87eadda6ec3974c99D786511F
-Optimistic Ethereum Network
+Contract Information - Optimistic Ethereum Network
 # 0x50Bce64397C75488465253c0A034b8097FeA6578
