@@ -4,6 +4,7 @@ Contract Information - Optimistic Ethereum Network
 # 0x50Bce64397C75488465253c0A034b8097FeA6578
 
 Gnosis-Safe Multisig - Ethereum Mainnet  
+--------------------------------------------  
 reward_multisigColdWallet
 # 0x3811F5674ABbC216AD29a1EDcDd0B05172A9f123
 HANeP_multisigColdWallet
