@@ -17,7 +17,7 @@ contract HanChain is ERC20, ERC20Burnable, ERC20Snapshot, AccessControl, Pausabl
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _grantRole(SNAPSHOT_ROLE, msg.sender);
         _grantRole(PAUSER_ROLE, msg.sender);
-        _mint(msg.sender, 1500000000 * 10 ** decimals());
+        _mint(msg.sender, 1500000000 * 10 ** decimals());  // 1.5 billion
     }
 
     function snapshot() public onlyRole(SNAPSHOT_ROLE) {
