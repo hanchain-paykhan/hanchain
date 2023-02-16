@@ -11,8 +11,9 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
  * tokens after a given release time.
  *
  * Useful for simple vesting schedules like "advisors get all of their tokens
- * after 1 year".
+ * after 2 year".
  */
+
 contract TokenTimelock is Context {
     using SafeERC20 for IERC20;
 
@@ -22,12 +23,15 @@ contract TokenTimelock is Context {
 
     // beneficiary of tokens after they are released
     mapping(uint => address) public beneficiary;
+
     uint public beneficiaryId;
     mapping(address => uint) public quota;
 
     // timestamp when token release is enabled
     mapping(address => uint) public releaseTime;
 
+    address[] public beneficiaryList;
+    bool boolean;
 
     /**
      * @dev Deploys a timelock instance that is able to hold the token specified, and will only release it to
@@ -52,24 +56,35 @@ contract TokenTimelock is Context {
         quota[_beneficiary] = _quota;
         lockedupSupply += _quota;
         releaseTime[_beneficiary] = _releaseTime;
+        duplicateCheck(_beneficiary, beneficiaryList);
+        if(!boolean) {
+            beneficiaryList.push(_beneficiary);
+        }
+        boolean = false;
+        emit Beneficiary(_beneficiary, _quota, _releaseTime);
     }
 
     function extendReleaseTime(address _beneficiary, uint _releaseTime) public onlyOwner {
         require(quota[_beneficiary] > 0, "no quota to release");
         require(_releaseTime > releaseTime[_beneficiary], "TokenTimelock: release time is before registered time");
         releaseTime[_beneficiary] = _releaseTime;
+        emit ExtendedReleaseTime(_beneficiary, _releaseTime);
     }
 
     /**
      * @dev Returns the beneficiary that will receive the tokens.
      */
-    function getAllBeneficiary() public view returns (address[] memory) {
-        address[] memory ret = new address[](beneficiaryId);
-        for (uint i = 0; i < beneficiaryId; i++) {
-            ret[i] = beneficiary[i];
-        }
-        return ret;
+    function getAllBeneficiaryWithoutDuplicate() public view returns (address[] memory) {
+        return beneficiaryList;
     }
+    // Check for duplication of beneficiary list
+    function duplicateCheck(address _check, address[] storage _list) internal {
+        for(uint i = 0; i < _list.length; i++) {
+            if(_list[i] == _check) {
+                 boolean = true;
+            }
+        }
+    }    
 
     /**
      * @dev Returns the time when the tokens are released in seconds since Unix epoch (i.e. Unix timestamp).
@@ -111,6 +126,7 @@ contract TokenTimelock is Context {
     function transferUnregisteredSupply(uint _amount) public onlyOwner {
         require(unregisteredSupply() >= _amount, "Exceeded unregisteredSupply amount");
         token.safeTransfer(msg.sender, _amount);
+        emit TransferUnregisteredSupply(msg.sender, _amount);
     }
 
     function recoverERC20(address _tokenAddress, uint256 _tokenAmount) external onlyOwner {
@@ -182,6 +198,9 @@ contract TokenTimelock is Context {
 
     // ------------------ EVENTS ------------------ //
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+    event Beneficiary(address indexed beneficiary, uint quota, uint releaseTime);
+    event ExtendedReleaseTime(address indexed beneficiary, uint releaseTime);
+    event TransferUnregisteredSupply(address indexed to, uint amount);
     event Released(address beneficiary, uint quota);
     event RecoveredERC20(address token, uint amount);
     event RecoveredERC721(address token, uint tokenId);   
