@@ -10,6 +10,14 @@
 
 0x50Bce64397C75488465253c0A034b8097FeA6578
 
+### Goerli Testnet
+
+0x0c90C57aaf95A3A87eadda6ec3974c99D786511F
+
+### optimism-goerli
+
+0x9e1028f5f1d5ede59748ffcee5532509976840e0
+
 # TokenVestingLock - Ehtereum Mainnet
 
 comming soon
