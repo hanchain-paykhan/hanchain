@@ -2,8 +2,6 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
  * @title TokenVestingLock
@@ -26,7 +24,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  * accounts but kept in this contract, and the actual transfer is triggered as a separate step by calling the {release} function.
 */
 
-contract TokenVestingLock is Ownable {
+contract TokenVestingLock {
     IERC20 public token;
 
     // Payee struct represents a participant who is eligible to receive tokens from a smart contract.
@@ -37,11 +35,11 @@ contract TokenVestingLock is Ownable {
         uint256 releaseTokens;  // The total number of tokens the payee is eligible to receive over the course of the contract
     }
 
-    uint256 public durationSeconds;  // The duration of the vesting period in seconds.
+    uint256 public immutable durationSeconds;  // The duration of the vesting period in seconds.
     uint256 public intervalSeconds;  // The time interval between token releases in seconds.
     uint256 public totalReleaseTokens;  // The total number of tokens to be released over the vesting period.
     uint256 public totalReleasedTokens;  // The total number of tokens already released.
-    uint256 public startTime;  // The timestamp when the vesting period starts.
+    uint256 public immutable startTime;  // The timestamp when the vesting period starts.
     uint256 public totalRounds;  // The total number of token release rounds.
     uint256 public totalAccounts;  // The total number of payees.
 
@@ -60,9 +58,16 @@ contract TokenVestingLock is Ownable {
      * @param _startDelay The delay in seconds before vesting starts.
      * @param _accounts The list of addresses of the payees.
      */
+    
     constructor(IERC20 _token, uint256 _startDelay, uint256 _durationSeconds, uint256 _intervalSeconds, uint256 _totalReleaseTokens, address[] memory _accounts, uint256[] memory _shares) {
         require(_accounts.length == _shares.length, "TokenVestingLock: accounts and shares length mismatch");
         require(_accounts.length > 0, "TokenVestingLock: no payees");
+
+        for (uint256 i = 0; i < _accounts.length - 1; i++) {
+            for (uint256 j = i + 1; j < _accounts.length; j++) {
+                require(_accounts[i] != _accounts[j], "TokenVestingLock: duplicate addresses");
+            }
+        }
 
         uint256 totalShares = 0;
         for (uint256 i = 0; i < _shares.length; i++) {
@@ -77,7 +82,7 @@ contract TokenVestingLock is Ownable {
         totalReleaseTokens = _totalReleaseTokens;
         totalRounds = durationSeconds/intervalSeconds;
         totalAccounts = _accounts.length;
-     for (uint256 i = 0; i < _accounts.length; i++) {
+        for (uint256 i = 0; i < _accounts.length; i++) {
             uint256 tokensPerRoundPerBeneficiary = totalReleaseTokens * intervalSeconds / durationSeconds * _shares[i] / 100;
             uint256 releaseTokens = tokensPerRoundPerBeneficiary * totalRounds;
             payees.push(Payee(_accounts[i], _shares[i], tokensPerRoundPerBeneficiary, releaseTokens));
@@ -97,13 +102,8 @@ contract TokenVestingLock is Ownable {
         uint256 currentTime = block.timestamp;
         require(currentTime >= startTime, "Vesting not started yet");
 
-        uint256 elapsedTime = currentTime - startTime;
-        uint256 currentInterval = elapsedTime / intervalSeconds;
-        uint256 nextIntervalTime = (currentInterval + 1) * intervalSeconds;
-
-        if (nextIntervalTime <= currentTime) {
-            uint256 numIntervals = (currentTime - startTime) / intervalSeconds;
-            uint256 totalVestedTokens = (totalReleaseTokens * numIntervals) / (durationSeconds / intervalSeconds);
+        uint256 numIntervals = (currentTime - startTime) / intervalSeconds;
+        uint256 totalVestedTokens = (totalReleaseTokens * numIntervals) / (durationSeconds / intervalSeconds);
             if (totalVestedTokens > totalReleaseTokens) {
                 totalVestedTokens = totalReleaseTokens;
             }
@@ -111,17 +111,13 @@ contract TokenVestingLock is Ownable {
             for (uint256 i = 0; i < payees.length; i++) {
                 uint256 payeeShare = (payees[i].shares * totalVestedTokens) / 100;
                 uint256 releasable = payeeShare - releasedAmount[payees[i].account];
-
-                if (unreleased > 0 && releasable > 0) {
-                    uint256 tokensToRelease = (releasable < unreleased) ? releasable : unreleased;
-                    releasedAmount[payees[i].account] += tokensToRelease;
-                    unreleased -= tokensToRelease;
-                    totalReleasedTokens += tokensToRelease;
-                    token.transfer(payees[i].account, tokensToRelease);
-                    emit released(payees[i].account, tokensToRelease);
-                }
+                uint256 tokensToRelease = (releasable < unreleased) ? releasable : unreleased;
+                releasedAmount[payees[i].account] += tokensToRelease;
+                unreleased -= tokensToRelease;
+                totalReleasedTokens += tokensToRelease;
+                token.transfer(payees[i].account, tokensToRelease);
+                emit released(payees[i].account, tokensToRelease);
             }
-        }
     }
 
     /**
@@ -182,32 +178,5 @@ contract TokenVestingLock is Ownable {
         return tokensPerRound * remaining;
     }
 
-    /** Allows the owner to recover any ERC20 tokens sent to this contract, except for the release tokens.
-     * If the token being recovered is the release token, it can only be recovered if it exceeds the total release tokens.
-     * Only the owner of the contract can call this function.
-     */
-    function recoverERC20(address _tokenAddress, uint256 _tokenAmount) external onlyOwner {
-        if(address(token) == _tokenAddress) {
-            uint tokenAmount = token.balanceOf(address(this)) - remainingTokens();
-            require(tokenAmount >= _tokenAmount, "Total Release Tokens cannot be withdrawn");
-            IERC20(_tokenAddress).transfer(msg.sender, _tokenAmount);
-            emit RecoveredERC20(_tokenAddress, tokenAmount);
-        } else {
-            IERC20(_tokenAddress).transfer(msg.sender, _tokenAmount);
-            emit RecoveredERC20(_tokenAddress, _tokenAmount);
-        }
-    }
-
-    /**
-     * Transfers an ERC721 token held by the contract to the owner.
-     * Only the owner of the contract can call this function.
-     */
-    function recoverERC721(address _tokenAddress, uint256 _tokenId) external onlyOwner {
-        IERC721(_tokenAddress).safeTransferFrom(address(this), msg.sender, _tokenId);
-        emit RecoveredERC721(_tokenAddress, _tokenId);
-    }
-
     event released(address indexed account, uint256 amount);
-    event RecoveredERC20(address token, uint256 amount);
-    event RecoveredERC721(address token, uint256 tokenId);
 }
