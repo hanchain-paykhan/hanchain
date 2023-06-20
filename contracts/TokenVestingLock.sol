@@ -25,7 +25,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 */
 
 contract TokenVestingLock {
-    IERC20 public token;
+    IERC20 public immutable token;
 
     // Payee struct represents a participant who is eligible to receive tokens from a smart contract.
     struct Payee {
@@ -36,12 +36,12 @@ contract TokenVestingLock {
     }
 
     uint256 public immutable durationSeconds;  // The duration of the vesting period in seconds.
-    uint256 public intervalSeconds;  // The time interval between token releases in seconds.
-    uint256 public totalReleaseTokens;  // The total number of tokens to be released over the vesting period.
-    uint256 public totalReleasedTokens;  // The total number of tokens already released.
+    uint256 public immutable intervalSeconds;  // The time interval between token releases in seconds.
+    uint256 public immutable totalReleaseTokens;  // The total number of tokens to be released over the vesting period.
     uint256 public immutable startTime;  // The timestamp when the vesting period starts.
-    uint256 public totalRounds;  // The total number of token release rounds.
-    uint256 public totalAccounts;  // The total number of payees.
+    uint256 public immutable totalRounds;  // The total number of token release rounds.
+    uint256 public immutable totalAccounts;  // The total number of payees.
+    uint256 public totalReleasedTokens;  // The total number of tokens already released.
 
     Payee[] public payees;  // An array of Payee structs representing the payees.
     mapping(address => uint256) public releasedAmount;  // A mapping of released token amounts for each payee address.
@@ -83,7 +83,8 @@ contract TokenVestingLock {
         totalRounds = durationSeconds/intervalSeconds;
         totalAccounts = _accounts.length;
         for (uint256 i = 0; i < _accounts.length; i++) {
-            uint256 tokensPerRoundPerBeneficiary = totalReleaseTokens * intervalSeconds / durationSeconds * _shares[i] / 100;
+            require(durationSeconds % intervalSeconds == 0, "error durationSeconds value");
+            uint256 tokensPerRoundPerBeneficiary = totalReleaseTokens * _shares[i] * intervalSeconds / durationSeconds / 100;
             uint256 releaseTokens = tokensPerRoundPerBeneficiary * totalRounds;
             payees.push(Payee(_accounts[i], _shares[i], tokensPerRoundPerBeneficiary, releaseTokens));
         }
@@ -112,11 +113,12 @@ contract TokenVestingLock {
                 uint256 payeeShare = (payees[i].shares * totalVestedTokens) / 100;
                 uint256 releasable = payeeShare - releasedAmount[payees[i].account];
                 uint256 tokensToRelease = (releasable < unreleased) ? releasable : unreleased;
+                require (tokensToRelease < token.balanceOf(address(this)), "The available balance for release is insufficient");
                 releasedAmount[payees[i].account] += tokensToRelease;
                 unreleased -= tokensToRelease;
                 totalReleasedTokens += tokensToRelease;
                 token.transfer(payees[i].account, tokensToRelease);
-                emit released(payees[i].account, tokensToRelease);
+                emit released(payees[i].account, tokensToRelease);                
             }
     }
 
