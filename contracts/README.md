@@ -42,7 +42,7 @@ https://etherscan.io/address/0x1FF7652E80ab0Ee42Ba6fAD132a1e8A334384F4c#code
 
 https://etherscan.io/address/0x3811F5674ABbC216AD29a1EDcDd0B05172A9f123#code
 
-### HANeP_Multisig - GnosisSafe
+### ePlatform_Multisig - GnosisSafe
 
 https://etherscan.io/address/0x495FCD7f56A0bf8BE1F29BE02D1aA5F492F2ff66#code
 
