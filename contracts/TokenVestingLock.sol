@@ -46,14 +46,15 @@ contract TokenVestingLock {
     Payee[] public payees;  // An array of Payee structs representing the payees.
     mapping(address => uint256) public releasedAmount;  // A mapping of released token amounts for each payee address.
 
+
     /** Creates a new TokenVestingLock contract instance that locks the specified ERC20 token for a certain period of time,
      * and releases it in a linear fashion to a list of payees.
      * Set the payee, start timestamp and vesting duration of the 'TokenVestingLock' wallet.
      *
-     * Creates an instance of `TokenVestingLock` where each account in `accounts` is assigned the number of shares at
-     * the matching position in the `shares` array.
-     * All addresses in `accounts` must be non-zero. Both arrays must have the same non-zero length, and there must be no
-     * duplicates in `accounts`
+     * Creates an instance of TokenVestingLock where each account in accounts is assigned the number of shares at
+     * the matching position in the shares array.
+     * All addresses in accounts must be non-zero. Both arrays must have the same non-zero length, and there must be no
+     * duplicates in accounts
      *
      * @param _startDelay The delay in seconds before vesting starts.
      * @param _accounts The list of addresses of the payees.
@@ -82,8 +83,8 @@ contract TokenVestingLock {
         totalReleaseTokens = _totalReleaseTokens;
         totalRounds = durationSeconds/intervalSeconds;
         totalAccounts = _accounts.length;
+        require(durationSeconds % intervalSeconds == 0, "error durationSeconds value");        
         for (uint256 i = 0; i < _accounts.length; i++) {
-            require(durationSeconds % intervalSeconds == 0, "error durationSeconds value");
             uint256 tokensPerRoundPerBeneficiary = totalReleaseTokens * _shares[i] * intervalSeconds / durationSeconds / 100;
             uint256 releaseTokens = tokensPerRoundPerBeneficiary * totalRounds;
             payees.push(Payee(_accounts[i], _shares[i], tokensPerRoundPerBeneficiary, releaseTokens));
@@ -93,33 +94,33 @@ contract TokenVestingLock {
 
     /**
      * Releases tokens to payees based on the vesting schedule.
-     * Tokens are released for each time interval as defined by `intervalSeconds` until the vesting period ends.
+     * Tokens are released for each time interval as defined by intervalSeconds until the vesting period ends.
      * Tokens that have already been released will not be released again.
      * If the vesting period has not yet started, the function will revert.
      *
      * Anyone can execute the 'release' function.
      */    
+
     function release() public {
         uint256 currentTime = block.timestamp;
         require(currentTime >= startTime, "Vesting not started yet");
 
         uint256 numIntervals = (currentTime - startTime) / intervalSeconds;
         uint256 totalVestedTokens = (totalReleaseTokens * numIntervals) / (durationSeconds / intervalSeconds);
-            if (totalVestedTokens > totalReleaseTokens) {
-                totalVestedTokens = totalReleaseTokens;
-            }
-            uint256 unreleased = totalVestedTokens;
-            for (uint256 i = 0; i < payees.length; i++) {
-                uint256 payeeShare = (payees[i].shares * totalVestedTokens) / 100;
-                uint256 releasable = payeeShare - releasedAmount[payees[i].account];
-                uint256 tokensToRelease = (releasable < unreleased) ? releasable : unreleased;
-                require (tokensToRelease < token.balanceOf(address(this)), "The available balance for release is insufficient");
-                releasedAmount[payees[i].account] += tokensToRelease;
-                unreleased -= tokensToRelease;
-                totalReleasedTokens += tokensToRelease;
-                token.transfer(payees[i].account, tokensToRelease);
-                emit released(payees[i].account, tokensToRelease);                
-            }
+        if (totalVestedTokens > totalReleaseTokens) {
+            totalVestedTokens = totalReleaseTokens;
+        }
+
+        for (uint256 i = 0; i < payees.length; i++) {
+            uint256 payeeShare = (payees[i].shares * totalVestedTokens) / 100;
+            uint256 releasable = payeeShare - releasedAmount[payees[i].account];
+            require(releasable > 0, "No tokens available for release");
+            require(releasable <= token.balanceOf(address(this)), "The available balance for release is insufficient");
+            releasedAmount[payees[i].account] += releasable;
+            totalReleasedTokens += releasable;
+            token.transfer(payees[i].account, releasable);
+            emit released(payees[i].account, releasable);
+        }
     }
 
     /**
