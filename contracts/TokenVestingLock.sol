@@ -114,7 +114,6 @@ contract TokenVestingLock {
         for (uint256 i = 0; i < payees.length; i++) {
             uint256 payeeShare = (payees[i].shares * totalVestedTokens) / 100;
             uint256 releasable = payeeShare - releasedAmount[payees[i].account];
-            require(releasable > 0, "No tokens available for release");
             require(releasable <= token.balanceOf(address(this)), "The available balance for release is insufficient");
             releasedAmount[payees[i].account] += releasable;
             totalReleasedTokens += releasable;
