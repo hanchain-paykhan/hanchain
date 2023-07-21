@@ -18,9 +18,14 @@
 
 0x9e1028f5f1d5ede59748ffcee5532509976840e0
 
+### base
+
+0x9e5AAC1Ba1a2e6aEd6b32689DFcF62A509Ca96f3
+
 ### base-goerli
 
 0xE2B21D4684b2bA62F3BE1FE286eacb90D26E394d
+
 
 # TokenVestingLock - Ehtereum Mainnet
 
