@@ -1,4 +1,4 @@
-![image](https://github.com/hanchain-paykhan/hanchain/assets/99153528/0e545e36-4c46-413a-b102-0d5cab9bedc1)# Contract Information
+# Contract Information
 
 # HanChain token
 
