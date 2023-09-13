@@ -56,6 +56,18 @@ const oweb3 = new Web3(optProvider);
 const mweb3 = new Web3(mainProvider);
 
 
+router.get("/totalsupply", async function (req, res, next) {
+  let webTotalSupply = await getMainHanChainTotalSupply();
+  let b = new BigNumber(webTotalSupply);
+  res.send(b.div(new BigNumber(10).pow(new BigNumber(18))).toString(10));
+});
+
+router.get("/totalSupply", async function (req, res, next) {
+  let webTotalSupply = await getMainHanEpChainTotalSupply();
+  let b = new BigNumber(webTotalSupply);
+  res.send(b.div(new BigNumber(10).pow(new BigNumber(18))).toString(10));
+});
+
 
 router.get('/han',async function(req,res,next){
   // Total Supply : 1.5 billion 
@@ -102,6 +114,23 @@ router.get('/han',async function(req,res,next){
 /****************************************************
  Mainnet Process   
 ****************************************************/
+
+async function getMainHanChainTotalSupply() {
+  const mainHanContract = await new mweb3.eth.Contract(MainHANABI.HAN_ABI, hancainMainNetCA);
+  console.log(mainHanContract);
+  const result = await mainHanContract.methods.totalSupply().call();
+  console.log(result);
+  return result;
+}
+
+async function getMainHanEpChainTotalSupply() {
+  const mainHanContract = await new mweb3.eth.Contract(MainHANEPABI.ABI, mHancainEpMainNetCA);
+  console.log(mainHanContract);
+  const result = await mainHanContract.methods.totalSupply().call();
+  console.log(result);
+  return result;
+}
+
 
 async function getHanchainTokenSubValue(){
   let addr_list=[ '0x495fcd7f56a0bf8be1f29be02d1aa5f492f2ff66','0x19681f34afce6b7fadfb07cd34c8f20dcf0a4f2a',
