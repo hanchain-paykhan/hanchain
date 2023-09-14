@@ -1,1 +1,1 @@
-https://scan.khans.io/tokenEconomy/totalsupply
+https://scan.khans.io/tokenomics/totalsupply
