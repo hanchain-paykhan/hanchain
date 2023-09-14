@@ -6,6 +6,9 @@
 ### This is intended to stabilize the value of HanChain and promote the growth of HanChain's real-world ecosystem. 
 
 ### HanChain's tokenomics are unique and attractive in that they start with the use of the real-world ecosystem and provide utility tokens that can be used in real life.
+Total Supply : https://scan.khans.io/tokenomics/totalsupply
+Circulating Supply : https://scan.khans.io/tokenomics/circulatingsupply
+Locked and Holding : https://staking.khans.io/hanscan
 
 ### All tokens except the initial circulating supply and the 365-day staking lock are locked in the TokenVestingLock contract, which has been audited by Certik.
 https://skynet.certik.com/projects/haneplatform
@@ -13,7 +16,6 @@ https://skynet.certik.com/projects/haneplatform
 # Five TokenVestingLock contracts have been deployed to the Ethereum network with the following unlock and vesting schedule:
 
 ### Total amount locked in 5 contracts : 953,591,527 HAN
-https://staking.khans.io/hanscan
 
 ### 1. ePLATFORM :
 HAN of ePLATFORM will be airdropped to users of ePlatforms such as content streaming, for the purpose of providing liquidity for DEX
