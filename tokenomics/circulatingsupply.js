@@ -30,10 +30,15 @@ const hancainMainNetCA="0x0c90C57aaf95A3A87eadda6ec3974c99D786511F";
 const munieMainNetCA="0x03d32959696319026bbDe564F128eB110AAbe7aF";
 const sheepooriMainNetCA="0xcee864b8633b96f5542f25e0b9942bf7557cc5c3";
 
+//Mainnet Contract Address Hanep
+const mHancainEpMainNetCA = "0x5052fa4a2a147eaAa4c0242e9Cc54a10A4f42070";
+
 // Mainnet ABI
 const MainHANABI=require("./abi/han/main/hancahin");
 const MainMunieABI=require("./abi/han/main/mainmunie");
 const MainStakingSPR=require("./abi/han/main/sheepoori");
+
+const MainHANEPABI = require("./abi/hanep/main/hanchainEp");
 
 // Optimism Contract Addresss 
 const hanchainOptCA="0x50Bce64397C75488465253c0A034b8097FeA6578";
