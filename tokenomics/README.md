@@ -1,4 +1,4 @@
-HanChain's tokenomics start with the real-world ecosystem, not with an initial coin offering (ICO). This is a unique feature that emphasizes HanChain's ability to be used in real life.
+### HanChain's tokenomics start with the real-world ecosystem, not with an initial coin offering (ICO). This is a unique feature that emphasizes HanChain's ability to be used in real life.
 
 # HanChain’s tokens are divided into two parts: REWARD and ePlatform.
 ### REWARD tokens are rewarded for staking Music Copyrights or staking HanChain tokens to provide liquidity for the copyright exchange.
@@ -37,7 +37,7 @@ Lock period : 24 Months
 Vesting schedule : 36 Months
 https://etherscan.io/address/0x223Ae305c45FAAA2A0A0eD9dcce6d30cB8c30652#readContract
 
-5. FOUNDER :
+### 5. FOUNDER :
 HAN of FOUNDER is granted to the project founders.
 Lock period : 24 Months
 Vesting schedule : 36 Months
