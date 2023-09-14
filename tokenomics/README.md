@@ -11,7 +11,7 @@
 #### Locked and Holding : https://staking.khans.io/hanscan
 
 ### All tokens except the initial circulating supply and the 365-day staking lock are locked in the TokenVestingLock contract, which has been audited by Certik.
-https://skynet.certik.com/projects/haneplatform
+#### https://skynet.certik.com/projects/haneplatform
 
 # Five TokenVestingLock contracts have been deployed to the Ethereum network with the following unlock and vesting schedule:
 
@@ -19,28 +19,28 @@ https://skynet.certik.com/projects/haneplatform
 
 ### 1. ePLATFORM :
 HAN of ePLATFORM will be airdropped to users of ePlatforms such as content streaming, for the purpose of providing liquidity for DEX
-Vesting schedule : 120 Months
-https://etherscan.io/address/0x8b5E7012B985ca3e285B8e8e3b1FC86F859aB74A#readContract
+#### Vesting schedule : 120 Months
+#### https://etherscan.io/address/0x8b5E7012B985ca3e285B8e8e3b1FC86F859aB74A#readContract
 
 ### 2. REWARDS :
 HAN of REWARDS is a reward for various stakings.
-Vesting schedule : 120 Months
-https://etherscan.io/address/0x8e6795E3fDb5FF8A686D5bCdb41d7F0A7F4BD40b#readContract
+#### Vesting schedule : 120 Months
+#### https://etherscan.io/address/0x8e6795E3fDb5FF8A686D5bCdb41d7F0A7F4BD40b#readContract
 
 ### 3. PARTNER :
 HAN of PARTNER is used to expand the ecosystem through various partnerships.
-Lock period : 24 Months
-Vesting schedule : 36 Months
-https://etherscan.io/address/0x2a256267fC7bc8F16fd08310B323907eEB660a71#readContract
+#### Lock period : 24 Months
+#### Vesting schedule : 36 Months
+#### https://etherscan.io/address/0x2a256267fC7bc8F16fd08310B323907eEB660a71#readContract
 
 ### 4. TEAM AND ADVISOR :
 HAN of TEAM AND ADVISOR is used for the purpose of supporting the development team and key members who contribute to the expansion of the ecosystem.
-Lock period : 24 Months
-Vesting schedule : 36 Months
-https://etherscan.io/address/0x223Ae305c45FAAA2A0A0eD9dcce6d30cB8c30652#readContract
+#### Lock period : 24 Months
+#### Vesting schedule : 36 Months
+#### https://etherscan.io/address/0x223Ae305c45FAAA2A0A0eD9dcce6d30cB8c30652#readContract
 
 ### 5. FOUNDER :
 HAN of FOUNDER is granted to the project founders.
-Lock period : 24 Months
-Vesting schedule : 36 Months
-https://etherscan.io/address/0x96cB4822C20b24BD60130D4CE03548F2Be3c2f19#readContract
+#### Lock period : 24 Months
+#### Vesting schedule : 36 Months
+#### https://etherscan.io/address/0x96cB4822C20b24BD60130D4CE03548F2Be3c2f19#readContract
