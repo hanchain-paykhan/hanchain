@@ -29,24 +29,24 @@
 # TokenVestingLock - Ehtereum Mainnet
 
 ### Reward
-
-https://etherscan.io/address/0x8e6795E3fDb5FF8A686D5bCdb41d7F0A7F4BD40b#code
+- REWARD: HAN tokens are rewarded for various stakings. Vesting schedule: 120 months.
+- https://etherscan.io/address/0x8e6795E3fDb5FF8A686D5bCdb41d7F0A7F4BD40b#code
 
 ### ePlatform
-
-https://etherscan.io/address/0x8b5E7012B985ca3e285B8e8e3b1FC86F859aB74A#code
+- HAN tokens will be airdropped to users of ePlatforms such as content streaming, for the purpose of providing liquidity for DEX. Vesting schedule: 120 months.
+- https://etherscan.io/address/0x8b5E7012B985ca3e285B8e8e3b1FC86F859aB74A#code
 
 ### Partner
-
-https://etherscan.io/address/0x2a256267fC7bc8F16fd08310B323907eEB660a71#code
+- HAN tokens are used to expand the ecosystem through various partnerships. Lock period: 24 months. Vesting schedule: 36 months.
+- https://etherscan.io/address/0x2a256267fC7bc8F16fd08310B323907eEB660a71#code
 
 ### Team and Advisor
-
-https://etherscan.io/address/0x223Ae305c45FAAA2A0A0eD9dcce6d30cB8c30652#code
+- HAN tokens are used to support the development team and key members who contribute to the expansion of the ecosystem. Lock period: 24 months. Vesting schedule: 36 months.
+- https://etherscan.io/address/0x223Ae305c45FAAA2A0A0eD9dcce6d30cB8c30652#code
 
 ### Founder
-
-https://etherscan.io/address/0x96cB4822C20b24BD60130D4CE03548F2Be3c2f19c#code
+- HAN tokens are granted to the project founders. Lock period: 24 months. Vesting schedule: 36 months.
+- https://etherscan.io/address/0x96cB4822C20b24BD60130D4CE03548F2Be3c2f19c#code
 
 # TokenTimelock - Ethereum Mainnet
 
@@ -55,8 +55,12 @@ https://etherscan.io/address/0x96cB4822C20b24BD60130D4CE03548F2Be3c2f19c#code
 # AccessControl of HanChain token and TokenTimelock
 
 ### Multisig - GnosisSafe
-
-https://etherscan.io/address/0xfc0e60F7B7AEe268d7492F7075ED9dD23E48F7cE#code
+- REWARD wallet contains HAN tokens that will be rewarded for various stakings. The tokens are stored in 5 gnosissafe wallets, each with 2/3 multisig, to ensure that they are distributed in a decentralized manner and protected from unauthorized access. https://etherscan.io/address/0x3811f5674abbc216ad29a1edcdd0b05172a9f123#code
+- ePLATFORM wallet contains HAN tokens that will be airdropped to users of e-platforms such as content streaming. The tokens are stored in 5 gnosissafe wallets, each with 2/3 multisig, to ensure that they are distributed in a decentralized manner and protected from unauthorized access. https://etherscan.io/address/0x495fcd7f56a0bf8be1f29be02d1aa5f492f2ff66#code
+- PARTNER wallet contains HAN tokens that will be used to incentivize partnerships. The tokens are stored in 5 gnosissafe wallets, each with 2/3 multisig, to ensure that they are distributed in a decentralized manner and protected from unauthorized access. https://etherscan.io/address/0x19681f34afce6b7fadfb07cd34c8f20dcf0a4f2a#code
+- TEAM and ADVISOR wallet contains HAN tokens that will be allocated to the development team and key members. The tokens are stored in 5 gnosissafe wallets, each with 2/3 multisig, to ensure that they are distributed in a decentralized manner and protected from unauthorized access. https://etherscan.io/address/0xc7bdbcda0b8162427868ac41713d2559a9e2281c#code
+- FOUNDER wallet contains HAN tokens that will be granted to the project founders. The tokens are stored in 5 gnosissafe wallets, each with 2/3 multisig, to ensure that they are distributed in a decentralized manner and protected from unauthorized access. https://etherscan.io/address/0x90a692e0819075c49100f9f5f2724e75d8a34711#code
+- https://etherscan.io/address/0xfc0e60F7B7AEe268d7492F7075ED9dD23E48F7cE#code
 
 ### Timelock - Openzeppelin
 
