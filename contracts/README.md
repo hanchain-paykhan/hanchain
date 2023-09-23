@@ -55,11 +55,8 @@
 # AccessControl of HanChain token and TokenTimelock
 
 ### Multisig - GnosisSafe
-- REWARD wallet contains HAN tokens that will be rewarded for various stakings. The tokens are stored in 5 gnosissafe wallets, each with 2/3 multisig, to ensure that they are distributed in a decentralized manner and protected from unauthorized access. https://etherscan.io/address/0x3811f5674abbc216ad29a1edcdd0b05172a9f123#code
-- ePLATFORM wallet contains HAN tokens that will be airdropped to users of e-platforms such as content streaming. The tokens are stored in 5 gnosissafe wallets, each with 2/3 multisig, to ensure that they are distributed in a decentralized manner and protected from unauthorized access. https://etherscan.io/address/0x495fcd7f56a0bf8be1f29be02d1aa5f492f2ff66#code
-- PARTNER wallet contains HAN tokens that will be used to incentivize partnerships. The tokens are stored in 5 gnosissafe wallets, each with 2/3 multisig, to ensure that they are distributed in a decentralized manner and protected from unauthorized access. https://etherscan.io/address/0x19681f34afce6b7fadfb07cd34c8f20dcf0a4f2a#code
-- TEAM and ADVISOR wallet contains HAN tokens that will be allocated to the development team and key members. The tokens are stored in 5 gnosissafe wallets, each with 2/3 multisig, to ensure that they are distributed in a decentralized manner and protected from unauthorized access. https://etherscan.io/address/0xc7bdbcda0b8162427868ac41713d2559a9e2281c#code
-- FOUNDER wallet contains HAN tokens that will be granted to the project founders. The tokens are stored in 5 gnosissafe wallets, each with 2/3 multisig, to ensure that they are distributed in a decentralized manner and protected from unauthorized access. https://etherscan.io/address/0x90a692e0819075c49100f9f5f2724e75d8a34711#code
+
+https://etherscan.io/address/0xfc0e60F7B7AEe268d7492F7075ED9dD23E48F7cE#code
 
 ### Timelock - Openzeppelin
 
@@ -68,21 +65,21 @@ https://etherscan.io/address/0x1FF7652E80ab0Ee42Ba6fAD132a1e8A334384F4c#code
 # HanChain - ColdWallet
 
 ### Reward_Multisig - GnosisSafe
-
-https://etherscan.io/address/0x3811F5674ABbC216AD29a1EDcDd0B05172A9f123#code
+- REWARD wallet contains HAN tokens that will be rewarded for various stakings. The tokens are stored in 5 gnosissafe wallets, each with 2/3 multisig, to ensure that they are distributed in a decentralized manner and protected from unauthorized access.
+- https://etherscan.io/address/0x3811F5674ABbC216AD29a1EDcDd0B05172A9f123#code
 
 ### ePlatform_Multisig - GnosisSafe
-
-https://etherscan.io/address/0x495FCD7f56A0bf8BE1F29BE02D1aA5F492F2ff66#code
+- ePLATFORM wallet contains HAN tokens that will be airdropped to users of e-platforms such as content streaming. The tokens are stored in 5 gnosissafe wallets, each with 2/3 multisig, to ensure that they are distributed in a decentralized manner and protected from unauthorized access.
+- https://etherscan.io/address/0x495FCD7f56A0bf8BE1F29BE02D1aA5F492F2ff66#code
 
 ### Partner_Multisig - GnosisSafe
-
-https://etherscan.io/address/0x19681F34aFCe6B7fadfb07cd34C8f20DcF0A4F2A#code
+- PARTNER wallet contains HAN tokens that will be used to incentivize partnerships. The tokens are stored in 5 gnosissafe wallets, each with 2/3 multisig, to ensure that they are distributed in a decentralized manner and protected from unauthorized access.
+- https://etherscan.io/address/0x19681F34aFCe6B7fadfb07cd34C8f20DcF0A4F2A#code
 
 ### Team_Multisig - GnosisSafe
-
-https://etherscan.io/address/0x90A692e0819075C49100F9F5f2724E75d8a34711#code
+- TEAM and ADVISOR wallet contains HAN tokens that will be allocated to the development team and key members. The tokens are stored in 5 gnosissafe wallets, each with 2/3 multisig, to ensure that they are distributed in a decentralized manner and protected from unauthorized access.
+- https://etherscan.io/address/0x90A692e0819075C49100F9F5f2724E75d8a34711#code
 
 ### Founder_Multisig - GnosisSafe
-
-https://etherscan.io/address/0xC7BdBCda0B8162427868aC41713d2559a9e2281c#code
+- FOUNDER wallet contains HAN tokens that will be granted to the project founders. The tokens are stored in 5 gnosissafe wallets, each with 2/3 multisig, to ensure that they are distributed in a decentralized manner and protected from unauthorized access. 
+- https://etherscan.io/address/0xC7BdBCda0B8162427868aC41713d2559a9e2281c#code
