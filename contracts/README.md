@@ -46,7 +46,7 @@
 
 ### Founder
 - HAN tokens are granted to the project founders. Lock period: 24 months. Vesting schedule: 36 months.
-- https://etherscan.io/address/0x96cB4822C20b24BD60130D4CE03548F2Be3c2f19c#code
+- https://etherscan.io/address/0x96cB4822C20b24BD60130D4CE03548F2Be3c2f19#code
 
 # TokenTimelock - Ethereum Mainnet
 
